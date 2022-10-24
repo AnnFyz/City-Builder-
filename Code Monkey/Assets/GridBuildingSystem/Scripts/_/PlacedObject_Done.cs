@@ -34,7 +34,8 @@ public class PlacedObject_Done : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public override string ToString() {
+    public override string ToString()
+    {
         return placedObjectTypeSO.nameString;
     }
 

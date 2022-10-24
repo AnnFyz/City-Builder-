@@ -12,7 +12,7 @@ public class CameraTarget : MonoBehaviour {
 
     [SerializeField] private Axis axis = Axis.XZ;
     [SerializeField] private float moveSpeed = 50f;
-
+    [SerializeField] private float rotationSpeed = 50f;
 
 
     private void Update() {
@@ -30,6 +30,14 @@ public class CameraTarget : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.D)) {
             moveX = +1f;
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
         }
 
         Vector3 moveDir;
@@ -53,6 +61,7 @@ public class CameraTarget : MonoBehaviour {
         }
 
         transform.position += moveDir * moveSpeed * Time.deltaTime;
+
     }
 
 }

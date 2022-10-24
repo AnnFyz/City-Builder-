@@ -48,7 +48,7 @@ public class GridBuildingSystem3D : MonoBehaviour {
 
         public void SetPlacedObject(PlacedObject_Done placedObject) {
             this.placedObject = placedObject;
-            grid.TriggerGridObjectChanged(x, y);
+            grid.TriggerGridObjectChanged(x, y); // 
         }
 
         public void ClearPlacedObject() {
