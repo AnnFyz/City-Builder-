@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e7747bdf78fa6141a2f81d16ff91e5f, type: 3}
-  m_Name: Building
+  m_Name: MyGasStation(Long Hause)
   m_EditorClassIdentifier: 
-  nameString: MyBuilding
-  prefab: {fileID: 5182353393870675408, guid: c4fe572437bcd8c49a34a3396d54bc79, type: 3}
-  visual: {fileID: 4342166997786137124, guid: 9e375eb09a592694f822b6ffa5856751, type: 3}
-  width: 1
+  nameString: MyGas Station(Long House)
+  prefab: {fileID: 2047171009110570518, guid: 6e5fe6d52e9fd7b4aa03296dfae36472, type: 3}
+  visual: {fileID: 362238391560634378, guid: 0b68c2a4a1fc6794ca0dafb391363a72, type: 3}
+  width: 2
   height: 1
