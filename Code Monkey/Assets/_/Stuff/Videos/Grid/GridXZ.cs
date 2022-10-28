@@ -115,7 +115,7 @@ public class GridXZ<TGridObject> {
         return GetGridObject(x, z);
     }
 
-    public Vector2Int ValidateGridPosition(Vector2Int gridPosition) {
+    public Vector2Int ValidateGridPosition(Vector2Int gridPosition) { // not precisely accurate in rotation
         return new Vector2Int(
             Mathf.Clamp(gridPosition.x, 0, width - 1),
             Mathf.Clamp(gridPosition.y, 0, height - 1)

@@ -72,7 +72,7 @@ public class GridBuildingSystem3D : MonoBehaviour {
             grid.GetXZ(mousePosition, out int x, out int z);
 
             Vector2Int placedObjectOrigin = new Vector2Int(x, z);
-            placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin);
+            placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin); //TO OVERRIDE (because by default it doesnt have to be on 0,0 coordinate)
 
             // Test Can Build
             List<Vector2Int> gridPositionList = placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir);
@@ -93,9 +93,9 @@ public class GridBuildingSystem3D : MonoBehaviour {
                 foreach (Vector2Int gridPosition in gridPositionList) {
                     grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
                 }
-
+               
                 OnObjectPlaced?.Invoke(this, EventArgs.Empty);
-
+                // placedObjectTypeSO = null; and ghost also null
                 //DeselectObjectType();
             } else {
                 // Cannot build here
