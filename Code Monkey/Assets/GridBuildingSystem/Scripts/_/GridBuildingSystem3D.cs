@@ -8,8 +8,8 @@ public class GridBuildingSystem3D : MonoBehaviour {
 
     public static GridBuildingSystem3D Instance { get; private set; }
 
-    public event EventHandler OnSelectedChanged;
-    public event EventHandler OnObjectPlaced;
+    public event EventHandler OnSelectedChanged;  // subscriber - BuildingGhost
+    public event EventHandler OnObjectPlaced; // subscriber - BuildingSound
 
 
     private GridXZ<GridObject> grid;
@@ -48,12 +48,12 @@ public class GridBuildingSystem3D : MonoBehaviour {
 
         public void SetPlacedObject(PlacedObject_Done placedObject) {
             this.placedObject = placedObject;
-            grid.TriggerGridObjectChanged(x, y); // 
+            grid.TriggerGridObjectChanged(x, y); //??? what does it affect (it has to affect information about objects on the grid)
         }
 
         public void ClearPlacedObject() {
             placedObject = null;
-            grid.TriggerGridObjectChanged(x, y);
+            grid.TriggerGridObjectChanged(x, y);// what does this coordinates mean (probably they are pointing at the place in the grid array, but how) 
         }
 
         public PlacedObject_Done GetPlacedObject() {
@@ -74,8 +74,8 @@ public class GridBuildingSystem3D : MonoBehaviour {
             Vector2Int placedObjectOrigin = new Vector2Int(x, z);
             placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin); //TO OVERRIDE (because by default it doesnt have to be on 0,0 coordinate)
 
-            // Test Can Build
-            List<Vector2Int> gridPositionList = placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir);
+            // Test Can Build                   BUT Where i compare free and occupied cells?
+            List<Vector2Int> gridPositionList = placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir); //??????? to check all the cells on which the building is built 
             bool canBuild = true;
             foreach (Vector2Int gridPosition in gridPositionList) {
                 if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild()) {
@@ -87,15 +87,13 @@ public class GridBuildingSystem3D : MonoBehaviour {
             if (canBuild) {
                 Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
                 Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
-
                 PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, dir, placedObjectTypeSO);
 
-                foreach (Vector2Int gridPosition in gridPositionList) {
-                    grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
+                foreach (Vector2Int gridPosition in gridPositionList) { // here will been checked all cells which belong to particular building
+                    grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject); //on this place will be cells occupied in grid array through GridObject class
                 }
                
-                OnObjectPlaced?.Invoke(this, EventArgs.Empty);
-                // placedObjectTypeSO = null; and ghost also null
+                OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound
                 //DeselectObjectType();
             } else {
                 // Cannot build here
@@ -117,7 +115,7 @@ public class GridBuildingSystem3D : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha0)) { DeselectObjectType(); }
 
 
-        if (Input.GetMouseButtonDown(1)) {
+        if (Input.GetMouseButtonDown(1)) {     //BUT Where i compare new free (after deleting of the building) and occupied cells?
             Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
             if (grid.GetGridObject(mousePosition) != null) {
                 // Valid Grid Position

@@ -92,7 +92,7 @@ public class GridXZ<TGridObject> {
         }
     }
 
-    public void TriggerGridObjectChanged(int x, int z) {
+    public void TriggerGridObjectChanged(int x, int z) {  // does this event affect something other than text and if so where
         OnGridObjectChanged?.Invoke(this, new OnGridObjectChangedEventArgs { x = x, z = z });
     }
 

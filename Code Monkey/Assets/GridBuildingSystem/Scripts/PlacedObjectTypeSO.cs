@@ -39,7 +39,7 @@ public class PlacedObjectTypeSO : ScriptableObject {
         }
     }
 
-    public Vector2Int GetRotationOffset(Dir dir) {
+    public Vector2Int GetRotationOffset(Dir dir) { //SOMEBODY HELP
         switch (dir) {
             default:
             case Dir.Down:  return new Vector2Int(0, 0);
@@ -49,7 +49,7 @@ public class PlacedObjectTypeSO : ScriptableObject {
         }
     }
 
-    public List<Vector2Int> GetGridPositionList(Vector2Int offset, Dir dir) {
+    public List<Vector2Int> GetGridPositionList(Vector2Int offset, Dir dir) { // here i need some help too;(
         List<Vector2Int> gridPositionList = new List<Vector2Int>();
         switch (dir) {
             default:
