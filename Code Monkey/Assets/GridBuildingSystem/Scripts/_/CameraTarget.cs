@@ -18,26 +18,28 @@ public class CameraTarget : MonoBehaviour {
     private void Update() {
         float moveX = 0f;
         float moveY = 0f;
-
+        float rotatDir = 0f;
         if (Input.GetKey(KeyCode.W)) {
             moveY = +1f;
         }
         if (Input.GetKey(KeyCode.S)) {
             moveY = -1f;
         }
-        if (Input.GetKey(KeyCode.A)) {
-            moveX = -1f;
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            moveX = +1f;
-        }
+        //if (Input.GetKey(KeyCode.A)) {
+        //    moveX = -1f;
+        //}
+        //if (Input.GetKey(KeyCode.D)) {
+        //    moveX = +1f;
+        //}
         if (Input.GetKey(KeyCode.Q))
         {
-            transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+            rotatDir = +1f;
+            //transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
         }
         if (Input.GetKey(KeyCode.E))
         {
-            transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
+            rotatDir = -1f;
+            //transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
         }
 
         Vector3 moveDir;
@@ -61,7 +63,7 @@ public class CameraTarget : MonoBehaviour {
         }
 
         transform.position += moveDir * moveSpeed * Time.deltaTime;
-
+        transform.Rotate(0, rotatDir * rotationSpeed * Time.deltaTime, 0);
     }
 
 }
