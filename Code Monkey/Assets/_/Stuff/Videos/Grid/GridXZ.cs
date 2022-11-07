@@ -93,7 +93,7 @@ public class GridXZ<TGridObject> {
     }
 
     public void TriggerGridObjectChanged(int x, int z) {
-        OnGridObjectChanged?.Invoke(this, new OnGridObjectChangedEventArgs { x = x, z = z });
+        OnGridObjectChanged?.Invoke(this, new OnGridObjectChangedEventArgs { x = x, z = z }); // ???
     }
 
     public void SetGridObject(Vector3 worldPosition, TGridObject value) {

@@ -8,8 +8,8 @@ public class GridBuildingSystem3D : MonoBehaviour {
 
     public static GridBuildingSystem3D Instance { get; private set; }
 
-    public event EventHandler OnSelectedChanged;
-    public event EventHandler OnObjectPlaced;
+    public event EventHandler OnSelectedChanged; // for ghost building
+    public event EventHandler OnObjectPlaced;// for sound 
 
 
     private GridXZ<GridObject> grid;
