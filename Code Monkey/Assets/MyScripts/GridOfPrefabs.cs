@@ -30,12 +30,12 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Update()
     {
-        Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
-
+        Vector3 mousePosition = GetMouseWorldPosition();
+        //Debug.Log("Mouse Position" + mousePosition);
         if (Input.GetMouseButtonDown(0))
         {
             PrefabGridObject prefabGridObject = grid.GetGridObject(mousePosition);
-
+            
             if (prefabGridObject != null)
             {
                 prefabGridObject.ChangeValue(5);
@@ -43,6 +43,21 @@ public class GridOfPrefabs : MonoBehaviour
             }
         }
 
+    }
+
+    private Vector3 GetMouseWorldPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
+        {
+            return raycastHit.point;
+        }
+        else
+        {
+            Debug.Log("FALSE Mouse COORDINATES");
+            return Vector3.zero;
+
+        }
     }
 }
     public class PrefabGridObject 
@@ -69,7 +84,7 @@ public class GridOfPrefabs : MonoBehaviour
         value += addValue;
         value = Mathf.Clamp(value, MIN, MAX);
         grid.TriggerGridObjectChanged(x, y);
-        Debug.Log("Value " + value);
+        //Debug.Log("Value " + value);
     }
 
     public override string ToString()

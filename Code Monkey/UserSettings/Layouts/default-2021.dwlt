@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Scene
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 371}
   m_MaxSize: {x: 10000, y: 10000}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 4057
+  controlID: 63
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 2984
+  controlID: 54
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -191,8 +191,8 @@ MonoBehaviour:
     y: 0
     width: 1732
     height: 967
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -218,14 +218,14 @@ MonoBehaviour:
     y: 967
     width: 1732
     height: 340
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 15}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
   - {fileID: 15}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -379,7 +379,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 24b3fbffd0bafcffc8cbfcff0e06fdff6456fdff04b4feff6ed9feff0cf6feff4c42ffff0e6dffff4c6effff22edffff6aefffff02f1ffff72f2ffffb0f7fffff8890000ce9d0000f49d0000949e0000a69e00004aa70000
+      m_ExpandedIDs: 6071fdffbe73fdff7880fdffee82fdff5c9ffdff86d5fdfffcd9fdfff6dcfdffe809feff1e0ffeffd825feff2c39feff8c3cffffda49ffff78acffff18fbffff3291000070940000e0ba00002abf000090c100009ac1000018c50000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -481,7 +481,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -673,18 +673,18 @@ MonoBehaviour:
         m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
-      m_Size: {x: 0.50001, y: 0.50001}
+      m_Size: {x: 1, y: 1}
     m_ShowGrid: 1
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.27310914, y: 0.26679316, z: -0.07911395, w: 0.9208765}
+    m_Target: {x: 0.45295542, y: -0.32550552, z: 0.18207325, w: 0.8097755}
     speed: 2
-    m_Value: {x: 0.27310374, y: 0.2667879, z: -0.07911239, w: 0.92085826}
+    m_Value: {x: 0.45295328, y: -0.32550398, z: 0.18207239, w: 0.8097716}
   m_Size:
-    m_Target: 0.8660254
+    m_Target: 13.022601
     speed: 2
-    m_Value: 0.8660254
+    m_Value: 13.022601
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -751,23 +751,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/MyPrefabs
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 78
   m_LastFolders:
-  - Assets/MyPrefabs
+  - Assets/Scenes
   m_LastFoldersGridSize: 78
   m_LastProjectPath: D:\UserHomes\s0582319\Desktop\Unity Projects\City-Builder-\Code
     Monkey
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 149}
-    m_SelectedIDs: c87e0000
-    m_LastClickedID: 32456
-    m_ExpandedIDs: 000000001c770000be7e0000c27e0000c47e000016840000968600004490000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 261}
+    m_SelectedIDs: 9c7b0000
+    m_LastClickedID: 31644
+    m_ExpandedIDs: 00000000b6730000b8730000ba730000bc730000be730000c0730000c2730000767b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -795,7 +795,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000001c77000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000b6730000b8730000ba730000bc730000be730000c0730000c2730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
