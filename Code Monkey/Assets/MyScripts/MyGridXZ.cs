@@ -103,7 +103,7 @@ public class MyGridXZ<TGridObject> {
 
     public TGridObject GetGridObject(int x, int z) {
         if (x >= 0 && z >= 0 && x < width && z < height) {
-            Debug.Log("RIGHT OBJ" + " X " + x + " Z " + z);
+            //Debug.Log("RIGHT OBJ" + " X " + x + " Z " + z);
             return gridArray[x, z];
         } else {
             Debug.Log("FALSE OBJ");
