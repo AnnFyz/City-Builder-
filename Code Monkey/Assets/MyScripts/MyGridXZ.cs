@@ -88,12 +88,12 @@ public class MyGridXZ<TGridObject> {
     public void SetGridObject(int x, int z, TGridObject value) {
         if (x >= 0 && z >= 0 && x < width && z < height) {
             gridArray[x, z] = value;
-            TriggerGridObjectChanged(x, z);
+            TriggerGridObjectChanged(x, z);  
         }
     }
 
     public void TriggerGridObjectChanged(int x, int z) {
-        OnGridObjectChanged?.Invoke(this, new OnGridObjectChangedEventArgs { x = x, z = z }); // ???
+        OnGridObjectChanged?.Invoke(this, new OnGridObjectChangedEventArgs { x = x, z = z }); // SetGridObject
     }
 
     public void SetGridObject(Vector3 worldPosition, TGridObject value) {

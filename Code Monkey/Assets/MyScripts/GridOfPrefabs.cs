@@ -23,7 +23,7 @@ public class GridOfPrefabs : MonoBehaviour
         {
             for (int y = 0; y < 10; y++)
             {
-                //Instantiate(blockPrefab, grid.GetWorldPosition(x, y), Quaternion.identity);
+               Instantiate(blockPrefab, grid.GetWorldPosition(x, y) + new Vector3(7.5f, -5f, 7.5f), Quaternion.identity);
             }
         }
     }
@@ -72,5 +72,8 @@ public class GridOfPrefabs : MonoBehaviour
         Debug.Log("Value " + value);
     }
 
-    
+    public override string ToString()
+    {
+        return value.ToString();
+    }
 }
