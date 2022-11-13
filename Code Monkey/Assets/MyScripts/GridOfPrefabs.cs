@@ -6,7 +6,7 @@ using CodeMonkey.Utils;
 
 public class GridOfPrefabs : MonoBehaviour
 {
-    [SerializeField] GameObject blockPrefab; // better Transform?
+    [SerializeField] GameObject blockPrefabObj;
     public static GridOfPrefabs Instance { get; private set; }
     private MyGridXZ<PrefabGridObject> grid;
 
@@ -18,31 +18,64 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Start()
     {
-        grid = new MyGridXZ<PrefabGridObject>(10, 10, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y, blockPrefab));
+        grid = new MyGridXZ<PrefabGridObject>(10, 10, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y));
         for (int x = 0; x < 10; x++)
         {
             for (int y = 0; y < 10; y++)
             {
-               Instantiate(blockPrefab, grid.GetWorldPosition(x, y) + new Vector3(7.5f, -5f, 7.5f), Quaternion.identity);
+                BlockPrefab blockPrefab = BlockPrefab.Create(grid.GetWorldPosition(x, y), blockPrefabObj);
+                grid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
             }
         }
     }
 
     private void Update()
     {
-        Vector3 mousePosition = GetMouseWorldPosition();
-        //Debug.Log("Mouse Position" + mousePosition);
-        if (Input.GetMouseButtonDown(0))
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Vector3 mousePosition = GetMouseWorldPosition();
+        //    PrefabGridObject prefabGridObject = grid.GetGridObject(mousePosition);
+
+        //    if (prefabGridObject != null)
+        //    {
+        //        //prefabGridObject.ChangeValue(50);
+
+        //    }
+        //}
+
+        if (Input.GetMouseButtonDown(1))
         {
-            PrefabGridObject prefabGridObject = grid.GetGridObject(mousePosition);
-            
-            if (prefabGridObject != null)
+            Vector3 mousePosition = GetMouseWorldPosition();
+            if (grid.GetGridObject(mousePosition) != null)
             {
-                prefabGridObject.ChangeValue(50);
-               
+                // Valid Grid Position
+                BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
+                if (placedObject != null)
+                {
+                    // Demolish
+                    placedObject.DestroySelf();
+                    grid.GetGridObject(mousePosition).ClearPlacedObject();
+
+                }
             }
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 mousePosition = GetMouseWorldPosition();
+            if (grid.GetGridObject(mousePosition) != null)
+            {
+                // Valid Grid Position
+                BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
+                if (placedObject != null)
+                {
+                    Debug.Log("Was changed" + placedObject);
+                    placedObject.ChangeHeight(3);
+                    grid.GetGridObject(mousePosition).SetPlacedObject(placedObject);
+
+                }
+            }
+        }
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -58,62 +91,68 @@ public class GridOfPrefabs : MonoBehaviour
 
         }
     }
-}
-    public class PrefabGridObject 
+
+    public class PrefabGridObject
     {
 
-    private const int MIN = 0;
-    private const int MAX = 255;
+        private const int MIN = 0;
+        private const int MAX = 255;
 
-    private MyGridXZ<PrefabGridObject> grid;
-    private int x;
-    private int y;
-    private int value;
+        private MyGridXZ<PrefabGridObject> grid;
+        private int x;
+        private int y;
+        private int value;
 
-    private GameObject blockPrefab;
-    public PrefabGridObject(MyGridXZ<PrefabGridObject> grid, int x, int y, GameObject blockPrefab)
-    {
-        this.grid = grid;
-        this.x = x;
-        this.y = y;
-        this.blockPrefab = blockPrefab;
+        private BlockPrefab blockPrefab;
+        public PrefabGridObject(MyGridXZ<PrefabGridObject> grid, int x, int y)
+        {
+            this.grid = grid;
+            this.x = x;
+            this.y = y;
+            blockPrefab = null;
+        }
+
+        public void ChangeValue(int addValue)
+        {
+            value += addValue;
+            value = Mathf.Clamp(value, MIN, MAX);
+            grid.TriggerGridObjectChanged(x, y);
+        }
+
+
+        public float GetValueNormalized()
+        {
+            return (float)value / MAX;
+        }
+
+        public override string ToString()
+        {
+            return x + ", " + y + "\n" + blockPrefab;
+            //return value.ToString();
+        }
+
+        public void SetPlacedObject(BlockPrefab blockPrefab)
+        {
+            this.blockPrefab = blockPrefab;
+            grid.TriggerGridObjectChanged(x, y);
+        }
+
+        public void ClearPlacedObject()
+        {
+            blockPrefab = null;
+            grid.TriggerGridObjectChanged(x, y);
+        }
+
+        public BlockPrefab GetPlacedObject()
+        {
+            return blockPrefab;
+        }
+
+        public bool CanBuild()
+        {
+            return blockPrefab == null;
+        }
     }
 
-    public void ChangeValue(int addValue) 
-    {
-        value += addValue;
-        value = Mathf.Clamp(value, MIN, MAX);
-        SelectObj();
-        grid.TriggerGridObjectChanged(x, y);
-        //Debug.Log("Value " + value);
-    }
-       
-    public void SelectObj()
-    {
-        Color oldColor = blockPrefab.GetComponentInChildren<MeshRenderer>().sharedMaterial.color;
-        Color newColor = new Color (GetValueNormalized(), GetValueNormalized(), oldColor.b);
-        blockPrefab.GetComponentInChildren<MeshRenderer>().sharedMaterial.SetColor("_Color", newColor);
-        Debug.Log("Color was changed " + newColor);
-        //blockPrefab.transform.localScale = new Vector3(blockPrefab.transform.localScale.x, blockPrefab.transform.localScale.y + value, blockPrefab.transform.localScale.z);
 
-    }
-
-    public float GetValueNormalized()
-    {
-        return (float)value / MAX;
-    }
-
-    public override string ToString()
-    {
-        return value.ToString();
-    }
-}
-
-public class BlockPrefab : MonoBehaviour
-{
-    //public void SelectObj() //TryGetComponent
-    //{
-    //  
-    //    
-    //}
 }
