@@ -120,7 +120,7 @@ public class MyGridXZ<TGridObject> {
     public Vector2Int ValidateGridPosition(Vector2Int gridPosition) {
         return new Vector2Int(
             Mathf.Clamp(gridPosition.x, 0, width - 1),
-            Mathf.Clamp(gridPosition.y, 0, height - 1)
+            Mathf.Clamp(gridPosition.y, 0, height - 1) //override this (return default(TGridObject);)
         );
     }
 

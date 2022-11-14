@@ -28,6 +28,7 @@ public class GridBuildingSystem3D : MonoBehaviour {
         placedObjectTypeSO = null;// placedObjectTypeSOList[0];
     }
 
+    
     public class GridObject {
 
         private GridXZ<GridObject> grid;

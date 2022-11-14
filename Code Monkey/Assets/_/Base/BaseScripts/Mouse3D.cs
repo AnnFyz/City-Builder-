@@ -26,7 +26,6 @@ public class Mouse3D : MonoBehaviour {
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, mouseColliderLayerMask)) {
             return raycastHit.point;
         } else {
-            Debug.Log("FALSE Mouse COORDINATES");
             return Vector3.zero;
            
         }
