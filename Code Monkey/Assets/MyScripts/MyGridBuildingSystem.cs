@@ -25,13 +25,14 @@ public class MyGridBuildingSystem : MonoBehaviour
 
     public void UpdateGrid(int newHeight)
     {
-        for (int x = 0; x < gridWidth; x++)
-        {
-            for (int y = 0; y < gridHeight; y++)
-            {
-
-            }
-        }
+        // delete all obj on thr grid
+        //for (int x = 0; x < gridWidth; x++)
+        //{
+        //    for (int y = 0; y < gridHeight; y++)
+        //    {
+        //        grid
+        //    }
+        //}
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
     }
     public class MyGridObject
