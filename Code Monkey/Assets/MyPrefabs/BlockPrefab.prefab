@@ -62,9 +62,10 @@ MonoBehaviour:
   placedObjectTypeSOList:
   - {fileID: 11400000, guid: 53a8e748f0c0a0f4ab204b8033dae65b, type: 2}
   - {fileID: 11400000, guid: c9bcd445f06edab4d9d36374db6bf233, type: 2}
-  gridWidth: 1
-  gridHeight: 1
-  cellSize: 10
+  gridWidth: 3
+  gridHeight: 3
+  cellSize: 5
+  origin: {x: 0, y: 0, z: 0}
 --- !u!1001 &8452613873916484050
 PrefabInstance:
   m_ObjectHideFlags: 0

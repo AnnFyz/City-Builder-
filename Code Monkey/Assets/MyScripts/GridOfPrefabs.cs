@@ -7,6 +7,8 @@ using CodeMonkey.Utils;
 public class GridOfPrefabs : MonoBehaviour
 {
     [SerializeField] GameObject blockPrefabObj;
+    [SerializeField] int width = 3;
+    [SerializeField] int height = 5;
     public static GridOfPrefabs Instance { get; private set; }
     private MyGridXZ<PrefabGridObject> grid;
 
@@ -18,10 +20,10 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Start()
     {
-        grid = new MyGridXZ<PrefabGridObject>(10, 10, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y));
-        for (int x = 0; x < 10; x++)
+        grid = new MyGridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y));
+        for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < 10; y++)
+            for (int y = 0; y < height; y++)
             {
                 BlockPrefab blockPrefab = BlockPrefab.Create(grid.GetWorldPosition(x, y), blockPrefabObj);
                 grid.GetGridObject(x, y).SetPlacedObject(blockPrefab);

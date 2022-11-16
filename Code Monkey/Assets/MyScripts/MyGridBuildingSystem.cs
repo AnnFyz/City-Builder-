@@ -8,9 +8,9 @@ public class MyGridBuildingSystem : MonoBehaviour
     [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
     private PlacedObjectTypeSO placedObjectTypeSO;
     private PlacedObjectTypeSO.Dir dir;
-    [SerializeField] int gridWidth = 1;
-    [SerializeField] int gridHeight = 1;
-    [SerializeField] float cellSize = 10f;
+    [SerializeField] int gridWidth = 3;
+    [SerializeField] int gridHeight = 3;
+    [SerializeField] float cellSize = 5f;
     BlockPrefab blockPrefab;
     public Vector3 origin;
     // startGrid and cuurentGrid
@@ -25,6 +25,13 @@ public class MyGridBuildingSystem : MonoBehaviour
 
     public void UpdateGrid(int newHeight)
     {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+
+            }
+        }
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
     }
     public class MyGridObject
