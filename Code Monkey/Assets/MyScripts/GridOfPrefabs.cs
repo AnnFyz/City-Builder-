@@ -10,6 +10,7 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] int width = 3;
     [SerializeField] int height = 5;
     public static GridOfPrefabs Instance { get; private set; }
+    public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
 
     private void Awake()
@@ -33,22 +34,10 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Vector3 mousePosition = GetMouseWorldPosition();
-        //    PrefabGridObject prefabGridObject = grid.GetGridObject(mousePosition);
-
-        //    if (prefabGridObject != null)
-        //    {
-        //        //prefabGridObject.ChangeValue(50);
-
-        //    }
-        //}
-
         if (Input.GetMouseButtonDown(1))
         {
             Vector3 mousePosition = GetMouseWorldPosition();
-            if (grid.GetGridObject(mousePosition) != null)
+            if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
             {
                 // Valid Grid Position
                 BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
@@ -65,9 +54,9 @@ public class GridOfPrefabs : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = GetMouseWorldPosition();
-            if (grid.GetGridObject(mousePosition) != null)
+            if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
             {
-                // Valid Grid Position
+
                 BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
                 if (placedObject != null)
                 {
@@ -85,10 +74,12 @@ public class GridOfPrefabs : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
         {
+            IsValidGridPos = true;
             return raycastHit.point;
         }
         else
         {
+            IsValidGridPos = false;
             return Vector3.zero;
 
         }

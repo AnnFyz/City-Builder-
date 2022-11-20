@@ -24,8 +24,12 @@ public class Mouse3D : MonoBehaviour {
     private Vector3 GetMouseWorldPosition_Instance() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, mouseColliderLayerMask)) {
+            Debug.Log("GridBuildingSystem3D.IsValidGridPos" + GridBuildingSystem3D.IsValidGridPos);
+            GridBuildingSystem3D.IsValidGridPos = true;
             return raycastHit.point;
         } else {
+            Debug.Log("GridBuildingSystem3D.IsValidGridPos" + GridBuildingSystem3D.IsValidGridPos);
+            GridBuildingSystem3D.IsValidGridPos = false;
             return Vector3.zero;
            
         }

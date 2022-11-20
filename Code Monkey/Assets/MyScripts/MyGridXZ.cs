@@ -81,7 +81,7 @@ public class MyGridXZ<TGridObject> {
     }
 
     public void GetXZ(Vector3 worldPosition, out int x, out int z) {
-        x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);
+        x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize); // ovverride in order to ignore all outside the grid
         z = Mathf.FloorToInt((worldPosition - originPosition).z / cellSize);
     }
 
@@ -120,8 +120,8 @@ public class MyGridXZ<TGridObject> {
     public Vector2Int ValidateGridPosition(Vector2Int gridPosition) {
         return new Vector2Int(
             Mathf.Clamp(gridPosition.x, 0, width - 1),
-            Mathf.Clamp(gridPosition.y, 0, height - 1) //override this (return default(TGridObject);)
+            Mathf.Clamp(gridPosition.y, 0, height - 1) 
         );
     }
-
+    
 }

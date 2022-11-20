@@ -7,7 +7,7 @@ using CodeMonkey.Utils;
 public class GridBuildingSystem3D : MonoBehaviour {
 
     public static GridBuildingSystem3D Instance { get; private set; }
-
+    public static bool IsValidGridPos = false;
     public event EventHandler OnSelectedChanged; // for ghost building
     public event EventHandler OnObjectPlaced;// for sound 
 
@@ -68,7 +68,7 @@ public class GridBuildingSystem3D : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0) && placedObjectTypeSO != null) {
+        if (Input.GetMouseButtonDown(0) && placedObjectTypeSO != null && IsValidGridPos) {
             Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
             grid.GetXZ(mousePosition, out int x, out int z);
 
@@ -77,6 +77,7 @@ public class GridBuildingSystem3D : MonoBehaviour {
 
             // Test Can Build
             List<Vector2Int> gridPositionList = placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir);
+           
             bool canBuild = true;
             foreach (Vector2Int gridPosition in gridPositionList) {
                 if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild()) {
@@ -86,6 +87,7 @@ public class GridBuildingSystem3D : MonoBehaviour {
             }
 
             if (canBuild) {
+               
                 Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
                 Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
 
