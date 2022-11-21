@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7747bdf78fa6141a2f81d16ff91e5f, type: 3}
   m_Name: HorizOrgForm
   m_EditorClassIdentifier: 
-  nameString: 
-  prefab: {fileID: 0}
-  visual: {fileID: 0}
-  width: 0
-  height: 0
+  nameString: HorizontalOrgForm
+  prefab: {fileID: 8519390558105600893, guid: ffef88004104e8c4088ce4527dabb855, type: 3}
+  visual: {fileID: 5930813321850338921, guid: e68f21773de19e24a8031310b77fc633, type: 3}
+  width: 2
+  height: 1

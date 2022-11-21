@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7747bdf78fa6141a2f81d16ff91e5f, type: 3}
   m_Name: VertOrgForm
   m_EditorClassIdentifier: 
-  nameString: 
-  prefab: {fileID: 0}
-  visual: {fileID: 0}
-  width: 0
-  height: 0
+  nameString: VerticalOrgForm
+  prefab: {fileID: 8000281925568123889, guid: 00e6298838519054cbaa22f2d61d0728, type: 3}
+  visual: {fileID: 3127568270603804644, guid: 0614bed7ddfb35642ba19ff02d90e02b, type: 3}
+  width: 2
+  height: 2
