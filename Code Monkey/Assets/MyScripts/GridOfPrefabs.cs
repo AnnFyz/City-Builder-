@@ -9,13 +9,13 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] GameObject blockPrefabObj;
     [SerializeField] int width = 3;
     [SerializeField] int height = 5;
-    public static GridOfPrefabs Instance { get; private set; }
+    //public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
 
     private void Awake()
     {
-        Instance = this;
+        //Instance = this;
 
     }
 
@@ -74,6 +74,7 @@ public class GridOfPrefabs : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
         {
+
             IsValidGridPos = true;
             return raycastHit.point;
         }

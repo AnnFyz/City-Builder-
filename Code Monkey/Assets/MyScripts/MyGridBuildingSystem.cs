@@ -30,7 +30,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     {       
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
     }
-    public class MyGridObject
+    public class MyGridObject 
     {
 
         private MyGridXZ<MyGridObject> grid;
@@ -77,7 +77,8 @@ public class MyGridBuildingSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && placedObjectTypeSO != null) //&& IsValidGridPos)
+
+        if (Input.GetMouseButtonDown(0) && placedObjectTypeSO != null && blockPrefab.IsThisBlockWasSelected) //&& IsValidGridPos)
         {
             Vector3 mousePosition = GetMouseWorldPosition();
             grid.GetXZ(mousePosition, out int x, out int z);
