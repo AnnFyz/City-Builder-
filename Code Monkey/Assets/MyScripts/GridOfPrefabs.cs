@@ -34,7 +34,7 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(2))
         {
             Vector3 mousePosition = GetMouseWorldPosition();
             if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
@@ -51,7 +51,7 @@ public class GridOfPrefabs : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Vector3 mousePosition = GetMouseWorldPosition();
             if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)

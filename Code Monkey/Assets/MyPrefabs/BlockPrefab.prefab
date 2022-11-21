@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placedObjectTypeSOList:
-  - {fileID: 11400000, guid: 53a8e748f0c0a0f4ab204b8033dae65b, type: 2}
+  - {fileID: 11400000, guid: a562fd9707c0ae747b986c402fc117c0, type: 2}
   - {fileID: 11400000, guid: c9bcd445f06edab4d9d36374db6bf233, type: 2}
   gridWidth: 3
   gridHeight: 3
