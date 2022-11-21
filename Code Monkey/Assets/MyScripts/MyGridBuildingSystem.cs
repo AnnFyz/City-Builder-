@@ -23,7 +23,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         blockPrefab = GetComponent<BlockPrefab>(); //IS THAT RIGHT?
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
         placedObjectTypeSO = null;// placedObjectTypeSOList[0];
-        blockPrefab.OnHeightChanged += UpdateGrid; //to update origin pos for plants and building prefabs
+        blockPrefab.OnHeightChanged += UpdateGrid;
     }
 
     public void UpdateGrid(int newHeight)
@@ -92,10 +92,10 @@ public class MyGridBuildingSystem : MonoBehaviour
             foreach (Vector2Int gridPosition in gridPositionList)
             {
                 if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild())
-                {
-                    canBuild = false;
-                    break;
-                }
+                    {
+                        canBuild = false;
+                        break;
+                    }
             }
 
             if (canBuild)
