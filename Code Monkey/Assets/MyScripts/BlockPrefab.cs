@@ -17,12 +17,6 @@ public class BlockPrefab : MonoBehaviour
         return placedBlockPrefab;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha4)) { GetMouseWorldPosition(); }
-        //GetMouseWorldPosition();
-    }
-
     public void DestroySelf()
     {
         Destroy(gameObject);
@@ -36,22 +30,4 @@ public class BlockPrefab : MonoBehaviour
         OnHeightChanged?.Invoke(newHeight);
     }
 
-    public bool GetMouseWorldPosition()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
-        {
-            IsThisBlockWasSelected = true;
-            Debug.Log(IsThisBlockWasSelected );
-            return IsThisBlockWasSelected;
-            
-        }
-        else
-        {
-            IsThisBlockWasSelected = false;
-            Debug.Log(IsThisBlockWasSelected);
-            return IsThisBlockWasSelected;
-
-        }
-    }
 }

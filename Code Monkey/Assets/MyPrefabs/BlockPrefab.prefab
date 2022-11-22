@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5436688609594192080}
   - component: {fileID: 909637586065932141}
   - component: {fileID: -4611271471455439405}
+  - component: {fileID: -1446097718899038186}
   m_Layer: 0
   m_Name: BlockPrefab
   m_TagString: Untagged
@@ -55,7 +56,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6254500726256895673}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cbd6b9865a71d446a1423cf49f5ab6b, type: 3}
   m_Name: 
@@ -68,6 +69,19 @@ MonoBehaviour:
   gridHeight: 3
   cellSize: 5
   origin: {x: 0, y: 0, z: 0}
+--- !u!114 &-1446097718899038186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254500726256895673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8228bf4414f33544b9a9070af1f42430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsThisObjWasSelected: 0
 --- !u!1001 &8452613873916484050
 PrefabInstance:
   m_ObjectHideFlags: 0
