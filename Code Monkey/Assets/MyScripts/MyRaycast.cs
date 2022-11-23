@@ -25,8 +25,11 @@ public class MyRaycast : MonoBehaviour
             if (prefabBlock == block)
             {
                 prefabBlock.IsThisBlockWasSelected = true;
-                BuildingManager.grid = localGrid.grid; //HOW TO CONVERT properly
-                Debug.Log("GLOBAL GRID WAS UPDATED");
+                if(BuildingManager.grid != localGrid.grid)
+                {
+                    BuildingManager.grid = localGrid.grid; //HOW TO CONVERT properly
+                    Debug.Log("GLOBAL GRID WAS UPDATED");
+                }
             }
             else
             {
