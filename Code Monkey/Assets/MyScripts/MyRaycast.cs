@@ -6,12 +6,14 @@ public class MyRaycast : MonoBehaviour
 {
     public bool IsThisObjWasSelected = false;
     BlockPrefab prefabBlock;
+    MyGridBuildingSystem localGrid;
     Ray ray;
     RaycastHit hit;
     BlockPrefab block;
     private void Awake()
     {
         prefabBlock = GetComponent<BlockPrefab>();
+        localGrid = GetComponent<MyGridBuildingSystem>();
     }
     private void Update()
     {
@@ -23,6 +25,8 @@ public class MyRaycast : MonoBehaviour
             if (prefabBlock == block)
             {
                 prefabBlock.IsThisBlockWasSelected = true;
+                BuildingManager.grid = localGrid.grid; //HOW TO CONVERT properly
+                Debug.Log("GLOBAL GRID WAS UPDATED");
             }
             else
             {

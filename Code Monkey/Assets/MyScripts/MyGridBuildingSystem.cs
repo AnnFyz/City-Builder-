@@ -5,24 +5,23 @@ using UnityEngine;
 
 public class MyGridBuildingSystem : MonoBehaviour
 {
-    private MyGridXZ<MyGridObject> grid;
-    [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
-    private PlacedObjectTypeSO placedObjectTypeSO;
+    public MyGridXZ<MyGridObject> grid;
+    //[SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
+    //private PlacedObjectTypeSO placedObjectTypeSO;
     private PlacedObjectTypeSO.Dir dir;
     [SerializeField] int gridWidth = 3;
     [SerializeField] int gridHeight = 3;
     [SerializeField] float cellSize = 5f;
     BlockPrefab blockPrefab;
     public Vector3 origin;
-    public static bool IsValidGridPos = false;
-    public event EventHandler OnSelectedChanged; // for ghost building
+    //public event EventHandler OnSelectedChanged; // for ghost building
     // startGrid and cuurentGrid
     private void Awake()
     {
         origin = transform.position;
         blockPrefab = GetComponent<BlockPrefab>(); //IS THAT RIGHT?
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
-        placedObjectTypeSO = null;// placedObjectTypeSOList[0];
+        //placedObjectTypeSO = null;// placedObjectTypeSOList[0];
         blockPrefab.OnHeightChanged += UpdateGrid;
     }
 
@@ -78,7 +77,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0) && placedObjectTypeSO != null && blockPrefab.IsThisBlockWasSelected) //&& IsValidGridPos)
+        if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasSelected) 
         {
             Vector3 mousePosition = GetMouseWorldPosition();
             grid.GetXZ(mousePosition, out int x, out int z);
@@ -87,7 +86,7 @@ public class MyGridBuildingSystem : MonoBehaviour
             placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin);
 
             // Test Can Build
-            List<Vector2Int> gridPositionList = placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir);
+            List<Vector2Int> gridPositionList = BuildingManager.Instance.placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir);
 
             bool canBuild = true;
             foreach (Vector2Int gridPosition in gridPositionList)
@@ -102,10 +101,10 @@ public class MyGridBuildingSystem : MonoBehaviour
             if (canBuild)
             {
 
-                Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
+                Vector2Int rotationOffset = BuildingManager.Instance.placedObjectTypeSO.GetRotationOffset(dir);
                 Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
 
-                PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, dir, placedObjectTypeSO);
+                PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, BuildingManager.Instance.dir, BuildingManager.Instance.placedObjectTypeSO);
 
                 foreach (Vector2Int gridPosition in gridPositionList)
                 {
@@ -124,78 +123,76 @@ public class MyGridBuildingSystem : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            dir = PlacedObjectTypeSO.GetNextDir(dir);
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    dir = PlacedObjectTypeSO.GetNextDir(dir);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); Debug.Log("First org form selected"); }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); Debug.Log("Second building selected"); }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); Debug.Log("Third building selected"); }
+        //if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); Debug.Log("First org form selected"); }
+        //if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); Debug.Log("Second building selected"); }
+        //if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); Debug.Log("Third building selected"); }
     }
 
-    private void DeselectObjectType()
-    {
-        placedObjectTypeSO = null; RefreshSelectedObjectType();
-    }
+    //private void DeselectObjectType()
+    //{
+    //    placedObjectTypeSO = null; RefreshSelectedObjectType();
+    //}
 
-    private void RefreshSelectedObjectType()
-    {
-        OnSelectedChanged?.Invoke(this, EventArgs.Empty);
-    }
+    //private void RefreshSelectedObjectType()
+    //{
+    //    OnSelectedChanged?.Invoke(this, EventArgs.Empty);
+    //}
 
 
-    public Vector2Int GetGridPosition(Vector3 worldPosition)
-    {
-        grid.GetXZ(worldPosition, out int x, out int z);
-        return new Vector2Int(x, z);
-    }
+    //public Vector2Int GetGridPosition(Vector3 worldPosition)
+    //{
+    //    grid.GetXZ(worldPosition, out int x, out int z);
+    //    return new Vector2Int(x, z);
+    //}
 
-    public Vector3 GetMouseWorldSnappedPosition()
-    {
-        Vector3 mousePosition = GetMouseWorldPosition();
-        grid.GetXZ(mousePosition, out int x, out int z);
+    //public Vector3 GetMouseWorldSnappedPosition()
+    //{
+    //    Vector3 mousePosition = GetMouseWorldPosition();
+    //    grid.GetXZ(mousePosition, out int x, out int z);
 
-        if (placedObjectTypeSO != null)
-        {
-            Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
-            Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
-            return placedObjectWorldPosition;
-        }
-        else
-        {
-            return mousePosition;
-        }
-    }
+    //    if (placedObjectTypeSO != null)
+    //    {
+    //        Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
+    //        Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
+    //        return placedObjectWorldPosition;
+    //    }
+    //    else
+    //    {
+    //        return mousePosition;
+    //    }
+    //}
 
-    public Quaternion GetPlacedObjectRotation()
-    {
-        if (placedObjectTypeSO != null)
-        {
-            return Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0);
-        }
-        else
-        {
-            return Quaternion.identity;
-        }
-    }
+    //public Quaternion GetPlacedObjectRotation()
+    //{
+    //    if (placedObjectTypeSO != null)
+    //    {
+    //        return Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0);
+    //    }
+    //    else
+    //    {
+    //        return Quaternion.identity;
+    //    }
+    //}
 
-    public PlacedObjectTypeSO GetPlacedObjectTypeSO()
-    {
-        return placedObjectTypeSO;
-    }
+    //public PlacedObjectTypeSO GetPlacedObjectTypeSO()
+    //{
+    //    return placedObjectTypeSO;
+    //}
 
     private Vector3 GetMouseWorldPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
         {
-            IsValidGridPos = true;
             return raycastHit.point;
         }
         else
         {
-            IsValidGridPos = false;
             return Vector3.zero;
 
         }
