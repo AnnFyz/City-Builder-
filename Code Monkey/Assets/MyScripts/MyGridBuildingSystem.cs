@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class MyGridBuildingSystem : MonoBehaviour
 {
     public MyGridXZ<MyGridObject> grid;
-    //[SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
-    //private PlacedObjectTypeSO placedObjectTypeSO;
-    private PlacedObjectTypeSO.Dir dir;
     [SerializeField] int gridWidth = 3;
     [SerializeField] int gridHeight = 3;
     [SerializeField] float cellSize = 5f;
@@ -86,7 +85,7 @@ public class MyGridBuildingSystem : MonoBehaviour
             placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin);
 
             // Test Can Build
-            List<Vector2Int> gridPositionList = BuildingManager.Instance.placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir);
+            List<Vector2Int> gridPositionList = BuildingManager.Instance.placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, BuildingManager.Instance.dir);
 
             bool canBuild = true;
             foreach (Vector2Int gridPosition in gridPositionList)
@@ -100,8 +99,7 @@ public class MyGridBuildingSystem : MonoBehaviour
 
             if (canBuild)
             {
-
-                Vector2Int rotationOffset = BuildingManager.Instance.placedObjectTypeSO.GetRotationOffset(dir);
+                Vector2Int rotationOffset = BuildingManager.Instance.placedObjectTypeSO.GetRotationOffset(BuildingManager.Instance.dir);
                 Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize(); 
                 Debug.Log("placedObjectWorldPosition" + placedObjectWorldPosition);
                 Debug.Log("rotationOffset" + rotationOffset); // ERROR : Rotation offset is always 0
