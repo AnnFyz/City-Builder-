@@ -6,10 +6,15 @@ using System;
 public class BlockPrefab : MonoBehaviour
 {
     public static Vector3 offset = new Vector3(7.5f, -5f, 7.5f);
-    public int newHeight;
-    public event Action <int> OnHeightChanged; // maybe it is tooooo global
+    private int newHeight;
+    private int startScale;
+    public event Action <int> OnHeightChanged; 
     public bool IsThisBlockWasSelected = false;
-   
+
+    private void Start()
+    {
+        startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y)/100;
+    }
     public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab)
     {
         GameObject placedBlockPrefabObj = Instantiate(blockPrefab, worldPosition + offset, Quaternion.identity);
@@ -26,8 +31,16 @@ public class BlockPrefab : MonoBehaviour
     {
         transform.localScale += new Vector3(0, addedHeight, 0);
         newHeight = Mathf.FloorToInt(transform.localScale.y);
-        Debug.Log("New Height" + newHeight);
         OnHeightChanged?.Invoke(newHeight);
     }
 
+    public int GetNewHeight()
+    {
+        return newHeight;
+    }
+
+    public int GetStartScale()
+    {
+        return startScale;
+    }
 }

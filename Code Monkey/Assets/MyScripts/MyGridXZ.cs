@@ -106,7 +106,6 @@ public class MyGridXZ<TGridObject> {
             //Debug.Log("RIGHT OBJ" + " X " + x + " Z " + z);
             return gridArray[x, z];
         } else {
-            Debug.Log("FALSE OBJ");
             return default(TGridObject);
         }
     }

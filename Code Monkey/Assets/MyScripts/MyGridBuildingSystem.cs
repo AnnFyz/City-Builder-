@@ -101,8 +101,6 @@ public class MyGridBuildingSystem : MonoBehaviour
             {
                 Vector2Int rotationOffset = BuildingManager.Instance.placedObjectTypeSO.GetRotationOffset(BuildingManager.Instance.dir);
                 Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize(); 
-                Debug.Log("placedObjectWorldPosition" + placedObjectWorldPosition);
-                Debug.Log("rotationOffset" + rotationOffset); // ERROR : Rotation offset is always 0
                 PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, BuildingManager.Instance.dir, BuildingManager.Instance.placedObjectTypeSO);
 
                 foreach (Vector2Int gridPosition in gridPositionList)

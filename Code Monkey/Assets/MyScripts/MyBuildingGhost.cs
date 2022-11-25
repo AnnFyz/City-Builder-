@@ -19,6 +19,16 @@ public class MyBuildingGhost : MonoBehaviour
         RefreshVisual();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Debug.Log("visual.localScale.y " + visual.localScale.y);
+            Debug.Log("visual.localPosition " + visual.localPosition);
+            Debug.Log("BuildingManager.blockPrefab.GetStartScale() " + BuildingManager.blockPrefab.GetStartScale());
+        }
+    }
+
     private void LateUpdate()
     {
         Vector3 targetPosition = BuildingManager.Instance.GetMouseWorldSnappedPosition();
@@ -42,7 +52,9 @@ public class MyBuildingGhost : MonoBehaviour
         {
             visual = Instantiate(placedObjectTypeSO.visual, Vector3.zero, Quaternion.identity);
             visual.parent = transform;
-            visual.localPosition = Vector3.zero;
+            //visual.localPosition = GhostBildingPosition();
+            float newGhostBuldingsPos = (visual.localPosition.y * BuildingManager.blockPrefab.GetNewHeight() * BuildingManager.blockPrefab.GetStartScale() * -1) - BuildingManager.blockPrefab.GetStartScale();
+            visual.localPosition = new Vector3(0, newGhostBuldingsPos, 0);
             visual.localEulerAngles = Vector3.zero;
             SetLayerRecursive(visual.gameObject, 11);
         }
@@ -57,5 +69,6 @@ public class MyBuildingGhost : MonoBehaviour
         }
     }
 
+  
 
 }

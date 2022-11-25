@@ -60,7 +60,6 @@ public class GridOfPrefabs : MonoBehaviour
                 BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
                 if (placedObject != null)
                 {
-                    Debug.Log("Was changed" + placedObject);
                     placedObject.ChangeHeight(3);
                     grid.GetGridObject(mousePosition).SetPlacedObject(placedObject);
 

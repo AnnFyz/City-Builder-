@@ -5,14 +5,14 @@ using UnityEngine;
 public class MyRaycast : MonoBehaviour
 {
     public bool IsThisObjWasSelected = false;
-    BlockPrefab prefabBlock;
+    BlockPrefab localPrefabBlock;
     MyGridBuildingSystem localGrid;
     Ray ray;
     RaycastHit hit;
     BlockPrefab block;
     private void Awake()
     {
-        prefabBlock = GetComponent<BlockPrefab>();
+        localPrefabBlock = GetComponent<BlockPrefab>();
         localGrid = GetComponent<MyGridBuildingSystem>();
     }
     private void Update()
@@ -22,24 +22,25 @@ public class MyRaycast : MonoBehaviour
         {
             //the collider could be children of the unit, so we make sure to check in the parent
             block = hit.collider.GetComponentInParent<BlockPrefab>();
-            if (prefabBlock == block)
+            if (localPrefabBlock == block)
             {
-                prefabBlock.IsThisBlockWasSelected = true;
+                localPrefabBlock.IsThisBlockWasSelected = true;
                 if(BuildingManager.grid != localGrid.grid)
                 {
-                    BuildingManager.grid = localGrid.grid; //HOW TO CONVERT properly
-                    Debug.Log("GLOBAL GRID WAS UPDATED");
+                    BuildingManager.grid = localGrid.grid;
+                    BuildingManager.blockPrefab = localPrefabBlock;
+                    BuildingManager.Instance.RefreshSelectedObjectType();
                 }
             }
             else
             {
-                prefabBlock.IsThisBlockWasSelected = false;
+                localPrefabBlock.IsThisBlockWasSelected = false;
             }
         }
 
         else
         {
-            prefabBlock.IsThisBlockWasSelected = false;
+            localPrefabBlock.IsThisBlockWasSelected = false;
         }
     }
 }
