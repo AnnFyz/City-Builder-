@@ -54,7 +54,14 @@ public class MyBuildingGhost : MonoBehaviour
             visual.parent = transform;
             //visual.localPosition = GhostBildingPosition();
             float newGhostBuldingsPos = (visual.localPosition.y * BuildingManager.blockPrefab.GetNewHeight() * BuildingManager.blockPrefab.GetStartScale() * -1) - BuildingManager.blockPrefab.GetStartScale();
-            visual.localPosition = new Vector3(0, newGhostBuldingsPos, 0);
+            if(BuildingManager.blockPrefab.GetNewHeight() == 0)
+            {
+                visual.localPosition = Vector3.zero;
+            }
+            else
+            {
+                visual.localPosition = new Vector3(0, newGhostBuldingsPos, 0);
+            }
             visual.localEulerAngles = Vector3.zero;
             SetLayerRecursive(visual.gameObject, 11);
         }

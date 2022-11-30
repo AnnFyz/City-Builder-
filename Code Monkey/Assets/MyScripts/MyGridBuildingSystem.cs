@@ -8,6 +8,7 @@ using UnityEngine;
 public class MyGridBuildingSystem : MonoBehaviour
 {
     public MyGridXZ<MyGridObject> grid;
+    public MyGridXZ<MyGridObject> oldGrid;
     [SerializeField] int gridWidth = 3;
     [SerializeField] int gridHeight = 3;
     [SerializeField] float cellSize = 5f;
@@ -18,15 +19,31 @@ public class MyGridBuildingSystem : MonoBehaviour
     private void Awake()
     {
         origin = transform.position;
-        blockPrefab = GetComponent<BlockPrefab>(); //IS THAT RIGHT?
+        blockPrefab = GetComponent<BlockPrefab>(); 
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
-        //placedObjectTypeSO = null;// placedObjectTypeSOList[0];
         blockPrefab.OnHeightChanged += UpdateGrid;
+        blockPrefab.OnHeightChanged += DeleteOldObjects;
     }
 
     public void UpdateGrid(int newHeight)
-    {       
+    {
+        oldGrid = grid;
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
+    }
+
+    public void DeleteOldObjects(int newHeight)
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int z = 0; z < gridHeight; z++)
+            {
+               if (oldGrid.GetGridObject(x, z) != null && oldGrid.GetGridObject(x, z).GetPlacedObject() != null)
+                {
+                    oldGrid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
+                    grid.GetGridObject(x, z).ClearPlacedObject();
+                }
+            }
+        }
     }
     public class MyGridObject 
     {
@@ -90,7 +107,7 @@ public class MyGridBuildingSystem : MonoBehaviour
             bool canBuild = true;
             foreach (Vector2Int gridPosition in gridPositionList)
             {
-                if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild())
+                if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
                     {
                         canBuild = false;
                         break;
